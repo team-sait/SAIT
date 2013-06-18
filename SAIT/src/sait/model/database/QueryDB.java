@@ -5,6 +5,7 @@ package sait.model.database;
  Copyright 2004, R.G.Baldwin
  
 */
+import java.net.URLEncoder;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +38,6 @@ public class QueryDB {
 
 			// Get a Statement object
 			stmt = con.createStatement();
-
-
 
 			// Get another statement object initialized as shown.
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -272,4 +271,57 @@ public class QueryDB {
 		}// end catch
 		return 1;
 	}
+	
+	public static String GetPartListHTML(String partGroupName) {
+		// TODO Auto-generated method stub
+
+		try {
+			Statement stmt;
+			ResultSet rs;
+
+			String ersatzteil;
+			String Beschreibung;
+			String BildType;
+			String PartsListHTMLString = " ";
+			
+			// Register the JDBC driver for MySQL.
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// Define URL of database server
+			String url = "jdbc:mysql://chat.juckt-mich.net:3306/sait";
+
+			// Get a connection to the database
+			Connection con = DriverManager.getConnection(url, "sait",
+					"omfgklartextpw");
+
+
+			// Get a Statement object
+			stmt = con.createStatement();
+
+			// Get another statement object initialized as shown.
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
+
+
+				//Grab current part group parts
+				rs = stmt.executeQuery("SELECT * from " + partGroupName);
+				// ID 	Ersatzteil 	Beschreibung 	Bild_Data 	Bild_Type
+				while (rs.next()) {
+					String str = "<b>" + rs.getString("Ersatzteil") + "</b>" + ": " + "<img src=\"http://chat.juckt-mich.net/SAIT/BILDER/" + URLEncoder.encode(rs.getString("Bild_Type").toString(), "ISO-8859-1").replace("+", "%20") + "\" height=\"128\" width=\"128\">" + "</br>\n";
+					PartsListHTMLString += str ;
+					
+				}
+
+			con.close();
+			System.out.println(PartsListHTMLString);
+			return PartsListHTMLString;
+			
+		} catch (Exception e) {
+			//System.out.println("Query: SELECT * "
+			//		+ "from hinweise_kategorien WHERE Kategorie = '" + CategoryName + "' ORDER BY id");
+			e.printStackTrace();
+		}// end catch
+		return "Error in GetPartsListHTML";
+	}
+	
 }// end class

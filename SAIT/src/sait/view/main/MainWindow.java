@@ -45,6 +45,7 @@ public class MainWindow extends JFrame {
 	private JMenu mnDatei;
 	private JMenuItem mntmBeenden;
 	private JEditorPane dtrpnBrowserPane;
+	//private ScrollPane dtrpnBrowserPane_Scrollpane;
 	private JComboBox<String> comboBox_HintsTitles;
 	private JComboBox<String> comboBox_Manufacturer;
 	private JComboBox<String> comboBox_Cartypes;
@@ -105,12 +106,12 @@ public class MainWindow extends JFrame {
 	private void initComponents() {
 
 		comboBox_HintsCategories = new JComboBox(hintsListCategories);
-		comboBox_HintsCategories.setBounds(438, 146, 162, 23);
+		comboBox_HintsCategories.setBounds(658, 146, 162, 23);
 		// comboBox_HintsTitles = new
 		// JComboBox(sait.control.main.Utility.cutString(hintsListTitles,
 		// ".htm", ""));
 		comboBox_HintsTitles = new JComboBox();
-		comboBox_HintsTitles.setBounds(438, 196, 255, 30);
+		comboBox_HintsTitles.setBounds(658, 196, 255, 30);
 
 		
 
@@ -120,8 +121,10 @@ public class MainWindow extends JFrame {
 		getContentPane().add(comboBox_HintsTitles);
 
 		dtrpnBrowserPane = new JEditorPane();
-		dtrpnBrowserPane.setBounds(597, 284, 172, 104);
-		dtrpnBrowserPane.setText("test");
+		dtrpnBrowserPane.setEditable(false);
+		dtrpnBrowserPane.setContentType("text/html");
+		dtrpnBrowserPane.setBounds(27, 328, 963, 368);
+		
 		getContentPane().add(dtrpnBrowserPane);
 
 		comboBox_HintsCategories.addItemListener(new ItemListener() {
@@ -200,7 +203,7 @@ public class MainWindow extends JFrame {
 		});
 
 		panel = new JPanel();
-		panel.setBounds(327, 310, 239, 206);
+		panel.setBounds(411, 278, 208, 23);
 		getContentPane().add(panel);
 		text = new JLabel("", JLabel.CENTER);
 		panel.add(text);
@@ -251,17 +254,17 @@ public class MainWindow extends JFrame {
 		
 		JLabel lblHinweiskategorie = new JLabel("Hinweiskategorie");
 		lblHinweiskategorie.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblHinweiskategorie.setBounds(327, 147, 111, 17);
+		lblHinweiskategorie.setBounds(547, 147, 111, 17);
 		getContentPane().add(lblHinweiskategorie);
 		
 		JLabel lblHinweis = new JLabel("Hinweis");
 		lblHinweis.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblHinweis.setBounds(327, 201, 111, 17);
+		lblHinweis.setBounds(596, 201, 52, 17);
 		getContentPane().add(lblHinweis);
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/schluessel_klein.png")));
-		lblNewLabel.setBounds(490, 52, 63, 54);
+		lblNewLabel.setBounds(710, 52, 63, 54);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblAutogruen = new JLabel("auto_gruen");
@@ -276,16 +279,16 @@ public class MainWindow extends JFrame {
 		
 		JLabel lblAutoviolett = new JLabel("auto_violett");
 		lblAutoviolett.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_violett_klein.png")));
-		lblAutoviolett.setBounds(607, 52, 105, 70);
+		lblAutoviolett.setBounds(827, 52, 105, 70);
 		getContentPane().add(lblAutoviolett);
 		
 		JLabel lblAutorot = new JLabel("auto_rot");
 		lblAutorot.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_rot_klein.png")));
-		lblAutorot.setBounds(626, 411, 86, 70);
+		lblAutorot.setBounds(888, 256, 86, 70);
 		getContentPane().add(lblAutorot);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(174, 310, 91, 80);
+		JLabel lblNewLabel_1 = new JLabel("Hinweisliste");
+		lblNewLabel_1.setBounds(93, 310, 94, 23);
 		getContentPane().add(lblNewLabel_1);
 		// box.add(redButton);
 		// box.add(greenButton);
@@ -368,7 +371,46 @@ public class MainWindow extends JFrame {
 			}
 		});
 		
-		
+		//Update Textbox with text from DB, dito picture.
+		comboBox_PartGroup.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+//					System.out.println("Cartypes");
+					String selectedItem = e.getItem().toString();
+					
+//					// System.out.println(selectedItem.toString()+ " " +
+//					// sait.model.database.QueryDB.GetCategoryIDByCategory(selectedItem.toString()));
+//					// If we don't do this, adding elements to the list will
+//					// result in the Listener firing a select action.
+//					comboBox_PartGroup.setEnabled(false);
+//
+//					// Clear list.
+//					comboBox_PartGroup.removeAllItems();
+//
+//					//Reserved
+//					//partsListPartgroups = sait.model.database.QueryDB.queryDBByID(
+//						//	"PKW", sait.model.database.QueryDB
+//							//		.GetCategoryIDByCategory("PKW",selectedItem
+//								//			.toString()));
+//
+//					
+//					
+//					comboBox_PartGroup.addItem("Bauteilgruppe auswaehlen...");
+//					partsListPartGroup = sait.model.database.QueryDB.queryDB("Baugruppen");
+//					for (String s : partsListPartGroup) {
+//						comboBox_PartGroup.addItem(s);
+//					}
+//					comboBox_PartGroup.setEnabled(true);
+					if (selectedItem != "Bauteilgruppe auswaehlen..."){
+						dtrpnBrowserPane.setText(sait.model.database.QueryDB.GetPartListHTML(selectedItem));
+					} 
+
+				}
+
+			}
+		});
+		//
 	}
 
 	private void linkModel() {
