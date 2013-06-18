@@ -34,15 +34,23 @@ public class MainWindow extends JFrame {
 	// Save Hint list to array for usage in combo box
 	private String[] hintsListCategories = sait.model.database.QueryDB
 			.queryDB("hinweise_kategorien");
+	
 	private String[] hintsListTitles = sait.model.database.QueryDB.queryDBByID(
 			"hinweise", 1);
-
+	private String [] partsListCartypes;
+	private String [] partsListPartgroups;
+	private String [] partsListPartGroup;
 	private JMenuBar menuBar;
 	private JMenu mnHilfe;
 	private JMenu mnDatei;
 	private JMenuItem mntmBeenden;
 	private JEditorPane dtrpnBrowserPane;
 	private JComboBox<String> comboBox_HintsTitles;
+	private JComboBox<String> comboBox_Manufacturer;
+	private JComboBox<String> comboBox_Cartypes;
+	private JComboBox<String> comboBox_PartGroup;
+	
+	
 
 	public MainWindow(MainModel argModel) {
 		setTitle("SAIT");
@@ -89,7 +97,7 @@ public class MainWindow extends JFrame {
 		model = argModel;
 		initComponents();
 		linkModel();
-		addListeners();
+		//addListeners();
 		populateLocale();
 
 	}
@@ -97,12 +105,12 @@ public class MainWindow extends JFrame {
 	private void initComponents() {
 
 		comboBox_HintsCategories = new JComboBox(hintsListCategories);
-		comboBox_HintsCategories.setBounds(433, 113, 172, 54);
+		comboBox_HintsCategories.setBounds(438, 146, 162, 23);
 		// comboBox_HintsTitles = new
 		// JComboBox(sait.control.main.Utility.cutString(hintsListTitles,
 		// ".htm", ""));
 		comboBox_HintsTitles = new JComboBox();
-		comboBox_HintsTitles.setBounds(434, 198, 259, 75);
+		comboBox_HintsTitles.setBounds(438, 196, 255, 30);
 
 		
 
@@ -112,7 +120,7 @@ public class MainWindow extends JFrame {
 		getContentPane().add(comboBox_HintsTitles);
 
 		dtrpnBrowserPane = new JEditorPane();
-		dtrpnBrowserPane.setBounds(111, 412, 172, 104);
+		dtrpnBrowserPane.setBounds(597, 284, 172, 104);
 		dtrpnBrowserPane.setText("test");
 		getContentPane().add(dtrpnBrowserPane);
 
@@ -133,7 +141,7 @@ public class MainWindow extends JFrame {
 
 					hintsListTitles = sait.model.database.QueryDB.queryDBByID(
 							"hinweise", sait.model.database.QueryDB
-									.GetCategoryIDByCategory(selectedItem
+									.GetCategoryIDByCategory("hinweise_kategorien" ,selectedItem
 											.toString()));
 					// hintsListTitles =
 					// sait.model.database.QueryDB.queryDB("hinweise", 3);
@@ -211,57 +219,59 @@ public class MainWindow extends JFrame {
 		
 		JLabel lblHerstellerWhlen = new JLabel("Hersteller w\u00E4hlen");
 		lblHerstellerWhlen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblHerstellerWhlen.setBounds(40, 133, 120, 23);
+		lblHerstellerWhlen.setBounds(40, 144, 120, 23);
 		getContentPane().add(lblHerstellerWhlen);
 		
 		JLabel lblModellWhlen = new JLabel("Modell w\u00E4hlen");
 		lblModellWhlen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblModellWhlen.setBounds(40, 201, 120, 23);
+		lblModellWhlen.setBounds(40, 198, 120, 23);
 		getContentPane().add(lblModellWhlen);
 		
-		JLabel lblBaugruppe = new JLabel("Baugruppe");
-		lblBaugruppe.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblBaugruppe.setBounds(40, 277, 100, 23);
-		getContentPane().add(lblBaugruppe);
+		JLabel lblBaugruppen = new JLabel("Baugruppen");
+		lblBaugruppen.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblBaugruppen.setBounds(40, 256, 100, 23);
+		getContentPane().add(lblBaugruppen);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Volkswagen", "Audi", "Mercedes"}));
-		comboBox.setBounds(40, 167, 81, 20);
-		getContentPane().add(comboBox);
+		comboBox_Manufacturer = new JComboBox();
+		comboBox_Manufacturer.setModel(new DefaultComboBoxModel(sait.model.database.QueryDB.queryDB("Hersteller")));
+		comboBox_Manufacturer.setBounds(40, 167, 81, 20);
+		getContentPane().add(comboBox_Manufacturer);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Golf 3", "A3", "C-Klasse"}));
-		comboBox_1.setBounds(40, 235, 100, 20);
-		getContentPane().add(comboBox_1);
+
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"_ausw\u00E4hlen_"}));
-		comboBox_2.setBounds(40, 317, 100, 20);
-		getContentPane().add(comboBox_2);
+		comboBox_Cartypes = new JComboBox();
+		//comboBox_Cartypes.setModel(new DefaultComboBoxModel(sait.model.database.QueryDB.queryDBByID("PKW", 14)));
+		comboBox_Cartypes.setBounds(40, 225, 225, 20);
+		getContentPane().add(comboBox_Cartypes);
+		
+		comboBox_PartGroup = new JComboBox();
+		//comboBox_PartGroup.setModel(new DefaultComboBoxModel(new String[] {"_ausw\u00E4hlen_"}));
+		comboBox_PartGroup.setBounds(40, 278, 225, 20);
+		getContentPane().add(comboBox_PartGroup);
 		
 		JLabel lblHinweiskategorie = new JLabel("Hinweiskategorie");
 		lblHinweiskategorie.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblHinweiskategorie.setBounds(275, 133, 111, 17);
+		lblHinweiskategorie.setBounds(327, 147, 111, 17);
 		getContentPane().add(lblHinweiskategorie);
 		
 		JLabel lblHinweis = new JLabel("Hinweis");
 		lblHinweis.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblHinweis.setBounds(275, 228, 111, 17);
+		lblHinweis.setBounds(327, 201, 111, 17);
 		getContentPane().add(lblHinweis);
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/schluessel_klein.png")));
-		lblNewLabel.setBounds(490, 48, 63, 54);
+		lblNewLabel.setBounds(490, 52, 63, 54);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblAutogruen = new JLabel("auto_gruen");
 		lblAutogruen.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_gruen_klein.png")));
-		lblAutogruen.setBounds(10, 52, 111, 70);
+		lblAutogruen.setBounds(40, 52, 111, 70);
 		getContentPane().add(lblAutogruen);
 		
 		JLabel lblAutoblau = new JLabel("auto_blau");
 		lblAutoblau.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_blau_klein.png")));
-		lblAutoblau.setBounds(193, 52, 155, 70);
+		lblAutoblau.setBounds(239, 52, 155, 70);
 		getContentPane().add(lblAutoblau);
 		
 		JLabel lblAutoviolett = new JLabel("auto_violett");
@@ -271,14 +281,94 @@ public class MainWindow extends JFrame {
 		
 		JLabel lblAutorot = new JLabel("auto_rot");
 		lblAutorot.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_rot_klein.png")));
-		lblAutorot.setBounds(607, 407, 86, 70);
+		lblAutorot.setBounds(626, 411, 86, 70);
 		getContentPane().add(lblAutorot);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(174, 310, 91, 80);
+		getContentPane().add(lblNewLabel_1);
 		// box.add(redButton);
 		// box.add(greenButton);
 		// box.add(blueButton);
 		// box.add(Box.createRigidArea(new Dimension(30, 1 )));
 		// box.add(Box.createHorizontalGlue());
 		// box.add(queryHintsDB);
+		
+		// No Input possible.
+		comboBox_Cartypes.setEnabled(false);
+		
+		
+		//If Manufacturer is selected, Update Model list
+		comboBox_Manufacturer.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					System.out.println("Cartypes");
+					Object selectedItem = e.getItem();
+					// If we don't do this, adding elements to the list will
+					// result in the Listener firing a select action.
+					comboBox_Cartypes.setEnabled(false);
+
+					// Clear list.
+					comboBox_Cartypes.removeAllItems();
+
+					partsListCartypes = sait.model.database.QueryDB.queryDBByID(
+							"PKW", sait.model.database.QueryDB
+									.GetCategoryIDByCategory("PKW",selectedItem
+											.toString()));
+					// hintsListTitles =
+					// sait.model.database.QueryDB.queryDB("hinweise", 3);
+
+					comboBox_Cartypes.addItem("Hersteller auswaehlen...");
+					for (String s : partsListCartypes) {
+						comboBox_Cartypes.addItem(s);
+					}
+					comboBox_Cartypes.setEnabled(true);
+
+				}
+
+			}
+		});
+		
+		//Initially disabled untill change by Cartypes
+		comboBox_PartGroup.setEnabled(false);
+		
+		comboBox_Cartypes.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					System.out.println("Cartypes");
+					Object selectedItem = e.getItem();
+					// System.out.println(selectedItem.toString()+ " " +
+					// sait.model.database.QueryDB.GetCategoryIDByCategory(selectedItem.toString()));
+					// If we don't do this, adding elements to the list will
+					// result in the Listener firing a select action.
+					comboBox_PartGroup.setEnabled(false);
+
+					// Clear list.
+					comboBox_PartGroup.removeAllItems();
+
+					//Reserved
+					//partsListPartgroups = sait.model.database.QueryDB.queryDBByID(
+						//	"PKW", sait.model.database.QueryDB
+							//		.GetCategoryIDByCategory("PKW",selectedItem
+								//			.toString()));
+
+					
+					
+					comboBox_PartGroup.addItem("Bauteilgruppe auswaehlen...");
+					partsListPartGroup = sait.model.database.QueryDB.queryDB("Baugruppen");
+					for (String s : partsListPartGroup) {
+						comboBox_PartGroup.addItem(s);
+					}
+					comboBox_PartGroup.setEnabled(true);
+
+				}
+
+			}
+		});
+		
+		
 	}
 
 	private void linkModel() {
@@ -304,45 +394,45 @@ public class MainWindow extends JFrame {
 		});
 	}
 
-	// we're only updating this method
-	private void addListeners() {
-		redButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ColorChangeEvent event = new ColorChangeEvent(Color.red, model);
-				event.dispatch();
-			}
-		});
-
-		greenButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ColorChangeEvent event = new ColorChangeEvent(Color.green,
-						model);
-				event.dispatch();
-			}
-		});
-
-		blueButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ColorChangeEvent event = new ColorChangeEvent(Color.blue, model);
-				event.dispatch();
-			}
-		});
-
-		queryHintsDB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				QueryHintsDBEvent event = new QueryHintsDBEvent();
-				event.dispatch();
-			}
-		});
-
-		comboBox_HintsCategories.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				QueryHintsDBEvent event = new QueryHintsDBEvent();
-				event.dispatch();
-			}
-		});
-
-	}
+//	// we're only updating this method
+//	private void addListeners() {
+//		redButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				ColorChangeEvent event = new ColorChangeEvent(Color.red, model);
+//				event.dispatch();
+//			}
+//		});
+//
+//		greenButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				ColorChangeEvent event = new ColorChangeEvent(Color.green,
+//						model);
+//				event.dispatch();
+//			}
+//		});
+//
+//		blueButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				ColorChangeEvent event = new ColorChangeEvent(Color.blue, model);
+//				event.dispatch();
+//			}
+//		});
+//
+//		queryHintsDB.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				QueryHintsDBEvent event = new QueryHintsDBEvent();
+//				event.dispatch();
+//			}
+//		});
+//
+//		comboBox_HintsCategories.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				QueryHintsDBEvent event = new QueryHintsDBEvent();
+//				event.dispatch();
+//			}
+//		});
+//
+//	}
 
 	private void populateLocale() {
 		// this is where you would normally get the

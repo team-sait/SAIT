@@ -72,6 +72,25 @@ public class QueryDB {
 					queryResult.add(str);
 				}
 				break;
+			case "Hersteller":
+				
+				rs = stmt.executeQuery("SELECT * "
+						+ "from " + requestType + " ORDER BY id");
+				
+				while (rs.next()) {
+					String str = rs.getString("Herstellername");
+					queryResult.add(str);
+				}
+				break;
+			case "Baugruppen":
+				rs = stmt.executeQuery("SELECT * "
+						+ "from " + requestType + " ORDER BY id");
+				
+				while (rs.next()) {
+					String str = rs.getString("Baugruppe");
+					queryResult.add(str);
+				}
+				break;
 				
 			default: System.out.println("Error, Will Robinson!");
 			}
@@ -133,8 +152,8 @@ public class QueryDB {
 			// rs = stmt.executeQuery("SELECT * "
 			//		+ "from hinweise ORDER BY id");
 			
-			rs = stmt.executeQuery("SELECT * "
-					+ "from " + tableName + " ORDER BY id");
+			//rs = stmt.executeQuery("SELECT * "
+					//+ "from " + tableName + " ORDER BY id");
 			
 			switch (tableName) {
 			case "hinweise":
@@ -146,7 +165,15 @@ public class QueryDB {
 					String str = rs.getString("html_filename");
 					queryResult.add(str);
 				}
-
+				break;
+			case "PKW":
+				rs = stmt.executeQuery("SELECT * "
+						+ "from `" + tableName + "` WHERE `Hersteller_ID` =" + ID);
+				
+				while (rs.next()) {
+					String str = rs.getString("Modell") + "," + rs.getString("Baujahr") + "," +  rs.getString("Motorisierung") + "," +  rs.getString("Leistung") + "," +  rs.getString("Motorkennbuchstaben");
+					queryResult.add(str);
+				}
 				break;
 				
 			default: System.out.println("Table not in database.");
@@ -172,7 +199,7 @@ public class QueryDB {
 
 	}// end main
 
-	public static int GetCategoryIDByCategory(String CategoryName) {
+	public static int GetCategoryIDByCategory(String tableName, String CategoryName) {
 		// TODO Auto-generated method stub
 
 		try {
@@ -199,17 +226,41 @@ public class QueryDB {
 					ResultSet.CONCUR_READ_ONLY);
 
 			// Query the database
-			
-			rs = stmt.executeQuery("SELECT * "
-					+ "from hinweise_kategorien WHERE Kategorie = '" + CategoryName + "' ORDER BY id");
-			if(rs.next()){
-				
-			CategoryID = rs.getInt("ID");
-			
-			} else {
-				System.out.println("Warning: Category number SQL Result set empty.");
-				CategoryID = 1;
+			switch (tableName) {
+			case "hinweise_kategorien":
+
+				rs = stmt.executeQuery("SELECT * "
+						+ "from hinweise_kategorien WHERE Kategorie = '"
+						+ CategoryName + "' ORDER BY id");
+				if (rs.next()) {
+
+					CategoryID = rs.getInt("ID");
+
+				} else {
+					System.out
+							.println("Warning: Category number SQL Result set empty.");
+					CategoryID = 1;
+				}
+				break;
+			case "PKW":
+				rs = stmt.executeQuery("SELECT * "
+						+ "from PKW WHERE Hersteller_ID = '"
+						+ CategoryName + "' ORDER BY id");
+				if (rs.next()) {
+
+					CategoryID = rs.getInt("Hersteller_ID");
+
+				} else {
+					System.out
+							.println("Warning: PKW number SQL Result set empty.");
+							
+					CategoryID = 14;
+				}
+				break;
+			default:
+				System.out.println("Wrong Request Type " + tableName + " .");
 			}
+			
 			con.close();
 			
 			return CategoryID;
