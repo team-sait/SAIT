@@ -17,7 +17,7 @@ import javax.swing.event.MenuKeyEvent;
 import java.net.URLEncoder;
 
 public class MainWindow extends JFrame {
-
+	
 	private JLabel text;
 	private JButton redButton;
 	private JButton greenButton;
@@ -45,7 +45,8 @@ public class MainWindow extends JFrame {
 	private JComboBox<String> comboBox_HintsTitles;
 
 	public MainWindow(MainModel argModel) {
-
+		setTitle("SAIT");
+		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -69,7 +70,7 @@ public class MainWindow extends JFrame {
 			}
 
 		});
-
+		
 		mnDatei = new JMenu("Datei");
 		menuBar.add(mnDatei);
 
@@ -160,7 +161,7 @@ public class MainWindow extends JFrame {
 						
 
 						try {
-							// This encodes the selected Item to html (הצü,
+							// This encodes the selected Item to html 
 							// " ",...)
 							// replace("+", "%20") is needed because .encode
 							// uses application/x-www-form-urlencoded for

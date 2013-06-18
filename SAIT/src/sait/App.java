@@ -18,6 +18,7 @@ public class App {
                 MainWindow window = new MainWindow(model);
                 locator.setMainWindow(window);
                 window.pack();
+                window.setSize(800, 600);
                 window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 window.setVisible(true);
         }
