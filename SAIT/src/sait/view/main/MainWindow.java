@@ -101,7 +101,7 @@ public class MainWindow extends JFrame {
 		// JComboBox(sait.control.main.Utility.cutString(hintsListTitles,
 		// ".htm", ""));
 		comboBox_HintsTitles = new JComboBox();
-		comboBox_HintsTitles.setBounds(434, 198, 219, 75);
+		comboBox_HintsTitles.setBounds(434, 198, 259, 75);
 
 		
 
@@ -210,32 +210,32 @@ public class MainWindow extends JFrame {
 		
 		JLabel lblHerstellerWhlen = new JLabel("Hersteller w\u00E4hlen");
 		lblHerstellerWhlen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblHerstellerWhlen.setBounds(10, 96, 120, 23);
+		lblHerstellerWhlen.setBounds(40, 133, 120, 23);
 		getContentPane().add(lblHerstellerWhlen);
 		
 		JLabel lblModellWhlen = new JLabel("Modell w\u00E4hlen");
 		lblModellWhlen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblModellWhlen.setBounds(10, 164, 120, 23);
+		lblModellWhlen.setBounds(40, 201, 120, 23);
 		getContentPane().add(lblModellWhlen);
 		
 		JLabel lblBaugruppe = new JLabel("Baugruppe");
 		lblBaugruppe.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblBaugruppe.setBounds(10, 240, 100, 23);
+		lblBaugruppe.setBounds(40, 277, 100, 23);
 		getContentPane().add(lblBaugruppe);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Volkswagen", "Audi", "Mercedes"}));
-		comboBox.setBounds(10, 130, 81, 20);
+		comboBox.setBounds(40, 167, 81, 20);
 		getContentPane().add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Golf 3", "A3", "C-Klasse"}));
-		comboBox_1.setBounds(10, 198, 100, 20);
+		comboBox_1.setBounds(40, 235, 100, 20);
 		getContentPane().add(comboBox_1);
 		
 		JComboBox comboBox_2 = new JComboBox();
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"_ausw\u00E4hlen_"}));
-		comboBox_2.setBounds(10, 280, 100, 20);
+		comboBox_2.setBounds(40, 317, 100, 20);
 		getContentPane().add(comboBox_2);
 		
 		JLabel lblHinweiskategorie = new JLabel("Hinweiskategorie");
@@ -252,6 +252,26 @@ public class MainWindow extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/schluessel_klein.png")));
 		lblNewLabel.setBounds(490, 48, 63, 54);
 		getContentPane().add(lblNewLabel);
+		
+		JLabel lblAutogruen = new JLabel("auto_gruen");
+		lblAutogruen.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_gruen_klein.png")));
+		lblAutogruen.setBounds(10, 52, 111, 70);
+		getContentPane().add(lblAutogruen);
+		
+		JLabel lblAutoblau = new JLabel("auto_blau");
+		lblAutoblau.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_blau_klein.png")));
+		lblAutoblau.setBounds(193, 52, 155, 70);
+		getContentPane().add(lblAutoblau);
+		
+		JLabel lblAutoviolett = new JLabel("auto_violett");
+		lblAutoviolett.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_violett_klein.png")));
+		lblAutoviolett.setBounds(607, 52, 105, 70);
+		getContentPane().add(lblAutoviolett);
+		
+		JLabel lblAutorot = new JLabel("auto_rot");
+		lblAutorot.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_rot_klein.png")));
+		lblAutorot.setBounds(607, 407, 86, 70);
+		getContentPane().add(lblAutorot);
 		// box.add(redButton);
 		// box.add(greenButton);
 		// box.add(blueButton);
