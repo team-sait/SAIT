@@ -95,21 +95,23 @@ public class MainWindow extends JFrame {
 
 	private void initComponents() {
 
-		getContentPane().setLayout(new GridLayout(2, 1));
-
 		comboBox_HintsCategories = new JComboBox(hintsListCategories);
+		comboBox_HintsCategories.setBounds(433, 113, 172, 54);
 		// comboBox_HintsTitles = new
 		// JComboBox(sait.control.main.Utility.cutString(hintsListTitles,
 		// ".htm", ""));
 		comboBox_HintsTitles = new JComboBox();
+		comboBox_HintsTitles.setBounds(434, 198, 219, 75);
 
 		
 
 		comboBox_HintsTitles.setEnabled(false);
+		getContentPane().setLayout(null);
 		getContentPane().add(comboBox_HintsCategories);
 		getContentPane().add(comboBox_HintsTitles);
 
 		dtrpnBrowserPane = new JEditorPane();
+		dtrpnBrowserPane.setBounds(111, 412, 172, 104);
 		dtrpnBrowserPane.setText("test");
 		getContentPane().add(dtrpnBrowserPane);
 
@@ -189,6 +191,7 @@ public class MainWindow extends JFrame {
 		});
 
 		panel = new JPanel();
+		panel.setBounds(327, 310, 239, 206);
 		getContentPane().add(panel);
 		text = new JLabel("", JLabel.CENTER);
 		panel.add(text);
@@ -199,6 +202,56 @@ public class MainWindow extends JFrame {
 
 		Box box = Box.createHorizontalBox();
 		panel.add(box);
+		
+		JLabel lblHerzlichWillkommenZu = new JLabel("Herzlich Willkommen zu SAIT - Praktische Infos, Tipps und Tricks zu Ihrem Auto");
+		lblHerzlichWillkommenZu.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblHerzlichWillkommenZu.setBounds(10, 11, 643, 30);
+		getContentPane().add(lblHerzlichWillkommenZu);
+		
+		JLabel lblHerstellerWhlen = new JLabel("Hersteller w\u00E4hlen");
+		lblHerstellerWhlen.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblHerstellerWhlen.setBounds(10, 96, 120, 23);
+		getContentPane().add(lblHerstellerWhlen);
+		
+		JLabel lblModellWhlen = new JLabel("Modell w\u00E4hlen");
+		lblModellWhlen.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblModellWhlen.setBounds(10, 164, 120, 23);
+		getContentPane().add(lblModellWhlen);
+		
+		JLabel lblBaugruppe = new JLabel("Baugruppe");
+		lblBaugruppe.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblBaugruppe.setBounds(10, 240, 100, 23);
+		getContentPane().add(lblBaugruppe);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Volkswagen", "Audi", "Mercedes"}));
+		comboBox.setBounds(10, 130, 81, 20);
+		getContentPane().add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Golf 3", "A3", "C-Klasse"}));
+		comboBox_1.setBounds(10, 198, 100, 20);
+		getContentPane().add(comboBox_1);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"_ausw\u00E4hlen_"}));
+		comboBox_2.setBounds(10, 280, 100, 20);
+		getContentPane().add(comboBox_2);
+		
+		JLabel lblHinweiskategorie = new JLabel("Hinweiskategorie");
+		lblHinweiskategorie.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblHinweiskategorie.setBounds(275, 133, 111, 17);
+		getContentPane().add(lblHinweiskategorie);
+		
+		JLabel lblHinweis = new JLabel("Hinweis");
+		lblHinweis.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblHinweis.setBounds(275, 228, 111, 17);
+		getContentPane().add(lblHinweis);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/schluessel_klein.png")));
+		lblNewLabel.setBounds(490, 48, 63, 54);
+		getContentPane().add(lblNewLabel);
 		// box.add(redButton);
 		// box.add(greenButton);
 		// box.add(blueButton);
