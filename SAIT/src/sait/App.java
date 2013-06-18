@@ -12,7 +12,7 @@ public class App {
         
         public static void main(String[] args) {
         		//Debugging-Monitor
-        		MVC.showEventMonitor();  
+        		//MVC.showEventMonitor();  
         		saitModelLocator locator = saitModelLocator.getInstance();
                 MainModel model = new MainModel();
                 MainWindow window = new MainWindow(model);
