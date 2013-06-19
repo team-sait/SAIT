@@ -17,7 +17,7 @@ import javax.swing.event.MenuKeyEvent;
 import java.net.URLEncoder;
 
 public class MainWindow extends JFrame {
-	
+
 	private JLabel text;
 	private JButton redButton;
 	private JButton greenButton;
@@ -34,7 +34,7 @@ public class MainWindow extends JFrame {
 	// Save Hint list to array for usage in combo box
 	private String[] hintsListCategories = sait.model.database.QueryDB
 			.queryDB("hinweise_kategorien");
-	
+
 	private String[] hintsListTitles = sait.model.database.QueryDB.queryDBByID(
 			"hinweise", 1);
 	private String [] partsListCartypes;
@@ -50,12 +50,12 @@ public class MainWindow extends JFrame {
 	private JComboBox<String> comboBox_Manufacturer;
 	private JComboBox<String> comboBox_Cartypes;
 	private JComboBox<String> comboBox_PartGroup;
-	
-	
+
+
 
 	public MainWindow(MainModel argModel) {
 		setTitle("SAIT");
-		
+
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -74,12 +74,12 @@ public class MainWindow extends JFrame {
 				JOptionPane
 						.showMessageDialog(
 								mnHilfe,
-								"SAIT wurde geschrieben von David Seifried, Marcel Maier, Martin Marinov und Philipp Nägele.");
+								"SAIT wurde geschrieben von David Seifried, Marcel Maier, Martin Marinov und Philipp Nï¿½gele.");
 
 			}
 
 		});
-		
+
 		mnDatei = new JMenu("Datei");
 		menuBar.add(mnDatei);
 
@@ -113,7 +113,7 @@ public class MainWindow extends JFrame {
 		comboBox_HintsTitles = new JComboBox();
 		comboBox_HintsTitles.setBounds(658, 196, 255, 30);
 
-		
+
 
 		comboBox_HintsTitles.setEnabled(false);
 		getContentPane().setLayout(null);
@@ -124,7 +124,7 @@ public class MainWindow extends JFrame {
 		dtrpnBrowserPane.setEditable(false);
 		dtrpnBrowserPane.setContentType("text/html");
 		dtrpnBrowserPane.setBounds(27, 328, 963, 368);
-		
+
 		getContentPane().add(dtrpnBrowserPane);
 
 		comboBox_HintsCategories.addItemListener(new ItemListener() {
@@ -149,7 +149,7 @@ public class MainWindow extends JFrame {
 					// hintsListTitles =
 					// sait.model.database.QueryDB.queryDB("hinweise", 3);
 
-					comboBox_HintsTitles.addItem("Hinweis auswählen...");
+					comboBox_HintsTitles.addItem("Hinweis auswï¿½hlen...");
 					for (String s : sait.control.main.Utility.cutString(
 							hintsListTitles, ".htm", "")) {
 						comboBox_HintsTitles.addItem(s);
@@ -166,13 +166,13 @@ public class MainWindow extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					Object selectedItem = e.getItem();
-					
+
 					// Ugly as sin workaround to "listener fires when categories are changed" problem.
-					if ( selectedItem.toString() != "Hinweis auswählen...") {
-						
+					if ( selectedItem.toString() != "Hinweis auswï¿½hlen...") {
+
 
 						try {
-							// This encodes the selected Item to html 
+							// This encodes the selected Item to html
 							// " ",...)
 							// replace("+", "%20") is needed because .encode
 							// uses application/x-www-form-urlencoded for
@@ -214,79 +214,79 @@ public class MainWindow extends JFrame {
 
 		Box box = Box.createHorizontalBox();
 		panel.add(box);
-		
-		JLabel lblHerzlichWillkommenZu = new JLabel("Herzlich Willkommen zu SAIT - Praktische Infos, Tipps und Tricks zu Ihrem Auto");
+
+		JLabel lblHerzlichWillkommenZu = new JLabel("Herzlich Willkommen zu SAIT - Infos, Tipps und Tricks zu ihrem Auto");
 		lblHerzlichWillkommenZu.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblHerzlichWillkommenZu.setBounds(10, 11, 643, 30);
 		getContentPane().add(lblHerzlichWillkommenZu);
-		
+
 		JLabel lblHerstellerWhlen = new JLabel("Hersteller w\u00E4hlen");
 		lblHerstellerWhlen.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblHerstellerWhlen.setBounds(40, 144, 120, 23);
 		getContentPane().add(lblHerstellerWhlen);
-		
+
 		JLabel lblModellWhlen = new JLabel("Modell w\u00E4hlen");
 		lblModellWhlen.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblModellWhlen.setBounds(40, 198, 120, 23);
 		getContentPane().add(lblModellWhlen);
-		
+
 		JLabel lblBaugruppen = new JLabel("Baugruppen");
 		lblBaugruppen.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblBaugruppen.setBounds(40, 256, 100, 23);
 		getContentPane().add(lblBaugruppen);
-		
+
 		comboBox_Manufacturer = new JComboBox();
 		comboBox_Manufacturer.setModel(new DefaultComboBoxModel(sait.model.database.QueryDB.queryDB("Hersteller")));
 		comboBox_Manufacturer.setBounds(40, 167, 81, 20);
 		getContentPane().add(comboBox_Manufacturer);
-		
 
-		
+
+
 		comboBox_Cartypes = new JComboBox();
 		//comboBox_Cartypes.setModel(new DefaultComboBoxModel(sait.model.database.QueryDB.queryDBByID("PKW", 14)));
-		comboBox_Cartypes.setBounds(40, 225, 225, 20);
+		comboBox_Cartypes.setBounds(40, 225, 475, 20);
 		getContentPane().add(comboBox_Cartypes);
-		
+
 		comboBox_PartGroup = new JComboBox();
 		//comboBox_PartGroup.setModel(new DefaultComboBoxModel(new String[] {"_ausw\u00E4hlen_"}));
 		comboBox_PartGroup.setBounds(40, 278, 225, 20);
 		getContentPane().add(comboBox_PartGroup);
-		
+
 		JLabel lblHinweiskategorie = new JLabel("Hinweiskategorie");
 		lblHinweiskategorie.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblHinweiskategorie.setBounds(547, 147, 111, 17);
 		getContentPane().add(lblHinweiskategorie);
-		
+
 		JLabel lblHinweis = new JLabel("Hinweis");
 		lblHinweis.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblHinweis.setBounds(596, 201, 52, 17);
 		getContentPane().add(lblHinweis);
-		
+
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/schluessel_klein.png")));
 		lblNewLabel.setBounds(710, 52, 63, 54);
 		getContentPane().add(lblNewLabel);
-		
+
 		JLabel lblAutogruen = new JLabel("auto_gruen");
 		lblAutogruen.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_gruen_klein.png")));
 		lblAutogruen.setBounds(40, 52, 111, 70);
 		getContentPane().add(lblAutogruen);
-		
+
 		JLabel lblAutoblau = new JLabel("auto_blau");
 		lblAutoblau.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_blau_klein.png")));
 		lblAutoblau.setBounds(239, 52, 155, 70);
 		getContentPane().add(lblAutoblau);
-		
+
 		JLabel lblAutoviolett = new JLabel("auto_violett");
 		lblAutoviolett.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_violett_klein.png")));
 		lblAutoviolett.setBounds(827, 52, 105, 70);
 		getContentPane().add(lblAutoviolett);
-		
+
 		JLabel lblAutorot = new JLabel("auto_rot");
 		lblAutorot.setIcon(new ImageIcon(MainWindow.class.getResource("/sait/view/main/bilder/auto_rot_klein.png")));
 		lblAutorot.setBounds(888, 256, 86, 70);
 		getContentPane().add(lblAutorot);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Hinweisliste");
 		lblNewLabel_1.setBounds(93, 310, 94, 23);
 		getContentPane().add(lblNewLabel_1);
@@ -296,11 +296,11 @@ public class MainWindow extends JFrame {
 		// box.add(Box.createRigidArea(new Dimension(30, 1 )));
 		// box.add(Box.createHorizontalGlue());
 		// box.add(queryHintsDB);
-		
+
 		// No Input possible.
 		comboBox_Cartypes.setEnabled(false);
-		
-		
+
+
 		//If Manufacturer is selected, Update Model list
 		comboBox_Manufacturer.addItemListener(new ItemListener() {
 			@Override
@@ -325,17 +325,19 @@ public class MainWindow extends JFrame {
 					comboBox_Cartypes.addItem("Hersteller auswaehlen...");
 					for (String s : partsListCartypes) {
 						comboBox_Cartypes.addItem(s);
+
 					}
+					comboBox_Cartypes.setMaximumSize( comboBox_Cartypes.getPreferredSize() );
 					comboBox_Cartypes.setEnabled(true);
 
 				}
 
 			}
 		});
-		
+
 		//Initially disabled untill change by Cartypes
 		comboBox_PartGroup.setEnabled(false);
-		
+
 		comboBox_Cartypes.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -357,8 +359,8 @@ public class MainWindow extends JFrame {
 							//		.GetCategoryIDByCategory("PKW",selectedItem
 								//			.toString()));
 
-					
-					
+
+
 					comboBox_PartGroup.addItem("Bauteilgruppe auswaehlen...");
 					partsListPartGroup = sait.model.database.QueryDB.queryDB("Baugruppen");
 					for (String s : partsListPartGroup) {
@@ -370,7 +372,7 @@ public class MainWindow extends JFrame {
 
 			}
 		});
-		
+
 		//Update Textbox with text from DB, dito picture.
 		comboBox_PartGroup.addItemListener(new ItemListener() {
 			@Override
@@ -378,7 +380,7 @@ public class MainWindow extends JFrame {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 //					System.out.println("Cartypes");
 					String selectedItem = e.getItem().toString();
-					
+
 //					// System.out.println(selectedItem.toString()+ " " +
 //					// sait.model.database.QueryDB.GetCategoryIDByCategory(selectedItem.toString()));
 //					// If we don't do this, adding elements to the list will
@@ -394,8 +396,8 @@ public class MainWindow extends JFrame {
 //							//		.GetCategoryIDByCategory("PKW",selectedItem
 //								//			.toString()));
 //
-//					
-//					
+//
+//
 //					comboBox_PartGroup.addItem("Bauteilgruppe auswaehlen...");
 //					partsListPartGroup = sait.model.database.QueryDB.queryDB("Baugruppen");
 //					for (String s : partsListPartGroup) {
@@ -404,7 +406,7 @@ public class MainWindow extends JFrame {
 //					comboBox_PartGroup.setEnabled(true);
 					if (selectedItem != "Bauteilgruppe auswaehlen..."){
 						dtrpnBrowserPane.setText(sait.model.database.QueryDB.GetPartListHTML(selectedItem));
-					} 
+					}
 
 				}
 
