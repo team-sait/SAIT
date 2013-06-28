@@ -149,7 +149,7 @@ public class MainWindow extends JFrame {
 					// hintsListTitles =
 					// sait.model.database.QueryDB.queryDB("hinweise", 3);
 
-					comboBox_HintsTitles.addItem("Hinweis ausw�hlen...");
+					comboBox_HintsTitles.addItem("Hinweis auswählen...");
 					for (String s : sait.control.main.Utility.cutString(
 							hintsListTitles, ".htm", "")) {
 						comboBox_HintsTitles.addItem(s);
@@ -168,7 +168,7 @@ public class MainWindow extends JFrame {
 					Object selectedItem = e.getItem();
 
 					// Ugly as sin workaround to "listener fires when categories are changed" problem.
-					if ( selectedItem.toString() != "Hinweis ausw�hlen...") {
+					if ( selectedItem.toString() != "Hinweis auswählen...") {
 
 
 						try {
@@ -237,7 +237,7 @@ public class MainWindow extends JFrame {
 
 		comboBox_Manufacturer = new JComboBox();
 		comboBox_Manufacturer.setModel(new DefaultComboBoxModel(sait.model.database.QueryDB.queryDB("Hersteller")));
-		comboBox_Manufacturer.setBounds(40, 167, 81, 20);
+		comboBox_Manufacturer.setBounds(40, 167, 150, 20);
 		getContentPane().add(comboBox_Manufacturer);
 
 
@@ -287,7 +287,7 @@ public class MainWindow extends JFrame {
 		lblAutorot.setBounds(888, 256, 86, 70);
 		getContentPane().add(lblAutorot);
 
-		JLabel lblNewLabel_1 = new JLabel("Hinweisliste");
+		JLabel lblNewLabel_1 = new JLabel("Bauteilliste");
 		lblNewLabel_1.setBounds(93, 310, 94, 23);
 		getContentPane().add(lblNewLabel_1);
 		// box.add(redButton);

@@ -30,7 +30,7 @@ public class QueryDB {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			// Define URL of database server
-			String url = "jdbc:mysql://127.0.0.1:3306/sait";
+			String url = "jdbc:mysql://chat.juckt-mich.net:3306/sait";
 
 			// Get a connection to the database
 			Connection con = DriverManager.getConnection(url, "sait",
@@ -250,8 +250,8 @@ public class QueryDB {
 					CategoryID = rs.getInt("Hersteller_ID");
 
 				} else {
-					System.out
-							.println("Warning: PKW number SQL Result set empty.");
+		//			System.out
+			//				.println("Warning: PKW number SQL Result set empty.");
 
 					CategoryID = 14;
 				}
